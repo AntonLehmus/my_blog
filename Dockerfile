@@ -1,15 +1,8 @@
-FROM node:9
+FROM node:9-alpine
 
 
-RUN usermod -u 1010 node\
-  groupmod --gid 1010 node\
-  useradd --user-group --create-home --shell /bin/false app &&\
-  npm install --global npm@5.6.0\
-  usermod -u 1000 app\
-  groupmod -g 1000 app
+USER node
+WORKDIR /usr/node
 
-
-ENV HOME=/home/app
-
-USER app
-WORKDIR $HOME/blog
+COPY package.json .
+RUN npm install --quiet

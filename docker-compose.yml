@@ -1,12 +1,24 @@
 version: '3'
 services:
   blog:
-   #image: node:9-alpine
-   build: .
-   command: echo 'ready'
-   volumes:
-    - ./app:/home/app/blog
-    - ./app/node_modules:/home/app/blog/node_modules
-   ports:
-    - "8080:80"
-    - "8181:433"
+    build: .
+    command: npm run ${RUN_FLAG}
+    volumes:
+      - .:${WORKDIR}
+      - ./node_modules:${WORKDIR}/node_modules
+    ports:
+      - "8080:80"
+      - "8181:433"
+    depends_on:
+    - db
+    environment:
+      DATABASE_URL: postgres://${DB_USER}@postgres/${DB_NAME}
+  db:
+    image: postgres:10-alpine
+    restart: always
+    volumes:
+      - ./postgres/data:/var/lib/postgres/
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
