@@ -1,25 +1,28 @@
 {
-  "name": "my_blog",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "my-blog",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prod": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AntonLehmus/my_blog.git"
+  "nodemonConfig": {
+    "ignore": ["test/*", "public/*", "postgres/*"],
+    "delay": "2500"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AntonLehmus/my_blog/issues"
-  },
-  "homepage": "https://github.com/AntonLehmus/my_blog#readme",
   "dependencies": {
-    "express": "^4.16.2",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "^4.15.5",
+    "jade": "~1.11.0",
     "knex": "^0.14.2",
+    "morgan": "~1.9.0",
     "objection": "^0.9.4",
-    "pg": "^7.4.1"
+    "pg": "^7.4.1",
+    "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.12"
   }
 }

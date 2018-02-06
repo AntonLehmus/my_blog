@@ -2,13 +2,14 @@ version: '3'
 services:
   blog:
     build: .
-    command: npm run ${RUN_FLAG}
+    command: npm run ${RUN_COMMAND}
     volumes:
       - .:${WORKDIR}
       - ./node_modules:${WORKDIR}/node_modules
     ports:
       - "8080:80"
       - "8181:433"
+      - "3000:3000"
     depends_on:
     - db
     environment:
