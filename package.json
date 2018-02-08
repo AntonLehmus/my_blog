@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "migrate":"knex migrate:latest",
+    "migrate-rollback":"knex migrate:rollback",
     "prod": "npm run migrate && node ./bin/www",
-    "dev": "npm run migrate && nodemon ./bin/www"
+    "dev": "npm run migrate-rollback && npm run migrate && nodemon ./bin/www"
   },
   "nodemonConfig": {
     "ignore": [

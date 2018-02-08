@@ -10,16 +10,18 @@ class Paragraph extends Model {
       return 'paragraphs';
   }
 
-  static relationMappings = {
-    post: {
-      relation: Model.BelongsToOneRelation,
-      modelClass: Post,
-      join: {
-        from: 'paragraph.post_id',
-        to: 'paragraph.id'
+  static relationMappings() {
+    return{
+      post: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Post,
+        join: {
+          from: 'paragraph.post_id',
+          to: 'paragraph.id'
+        }
       }
     }
-  }
+    }
 }
 
 module.exports = Paragraph;
