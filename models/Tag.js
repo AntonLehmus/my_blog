@@ -2,30 +2,30 @@
 'use strict';
 
 const Model = require('objection').Model;
-
+//const Post   = require('./Post');
 
 class Tag extends Model {
     // Table name is the only required property.
     static get tableName() {
-      return 'tags';
+      return 'Tag';
   }
 
   static relationMappings() {
     return{
       posts: {
         relation: Model.ManyToManyRelation,
-        modelClass: Post,
+        modelClass: __dirname + '/Post',
         join: {
           from: 'Tag.id',
           through: {
-            from: 'posts_tags.tag_id',
-            to: 'posts_tags.post_id'
+            from: 'Post_Tag.tag_id',
+            to: 'Post_Tag.post_id'
           },
           to: 'Post.id'
         }
       }
     }
-    }
+  }
 }
 
 module.exports = Tag;

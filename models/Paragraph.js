@@ -7,21 +7,21 @@ const Model = require('objection').Model;
 class Paragraph extends Model {
     // Table name is the only required property.
     static get tableName() {
-      return 'paragraphs';
+      return 'Paragraph';
   }
 
   static relationMappings() {
     return{
       post: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Post,
+        modelClass:  __dirname + '/Post',
         join: {
-          from: 'paragraph.post_id',
-          to: 'paragraph.id'
+          from: 'Paragraph.post_id',
+          to: 'Post.id'
         }
       }
     }
-    }
+  }
 }
 
 module.exports = Paragraph;

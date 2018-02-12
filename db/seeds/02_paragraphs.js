@@ -1,10 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('paragraphs').del()
+  return knex('Paragraph').del()
     .then(function () {
       // Inserts seed entries
-      return knex('paragraphs').insert([
+      return knex('Paragraph').insert([
         {id: 1, header: 'this is it', content: 'Heyy here is a really long text thingy', post_id: 1},
         {id: 2, header: 'header', content: 'Heyy here is a really long text thingy', post_id: 1},
         {id: 3, header: 'important stuff', content: 'Heyy here is a really long text thingy', post_id: 1},

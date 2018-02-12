@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
     return Promise.all([
-        knex.schema.createTable('posts', function (table) {
+        knex.schema.createTable('Post', function (table) {
             table.increments().primary();
             table.string('title').notNullable();
             table.timestamps();
@@ -11,6 +11,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     return Promise.all([
-        knex.schema.dropTableIfExists('posts')
+        knex.schema.dropTableIfExists('Post')
     ])
 };

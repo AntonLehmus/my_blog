@@ -8,7 +8,7 @@ const Paragraph = require('./Paragraph');
 class Post extends Model {
     // Table name is the only required property.
     static get tableName() {
-      return 'posts';
+      return 'Post';
   }
 
   // This object defines the relations to other models.
@@ -29,14 +29,14 @@ class Post extends Model {
         join: {
           from: 'Post.id',
           through: {
-            from: 'posts_tags.post_id',
-            to: 'posts_tags.tag_id'
+            from: 'Post_Tag.post_id',
+            to: 'Post_Tag.tag_id'
           },
           to: 'Tag.id'
         }
       }
     }
-    }
+  }
 }
 
 module.exports = Post;
