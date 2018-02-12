@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     .skipUndefined()
     // For security reasons, limit the relations that can be fetched.
     .allowEager('[tag, paragraph]')
-    .eager(req.query.eager)
+    .eager('[tag, paragraph]')
     .then(function(posts){
         res.send(posts);
     });
