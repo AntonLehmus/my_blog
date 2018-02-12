@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { transaction } = require('objection');
 const Post = require('../models/Post');
-const Tag = require('../models/Tag');
-const Paragraph = require('../models/Paragraph');
+//const Tag = require('../models/Tag');
+//const Paragraph = require('../models/Paragraph');
 
 
 /* GET posts listing. */
@@ -20,5 +20,23 @@ router.get('/', function(req, res, next) {
 
 });
 
+/* GET post by id. */
+router.get('/:id', function(req, res, next) {
+
+    const post = Post.query().findById(req.params.id)
+    .skipUndefined()
+    // For security reasons, limit the relations that can be fetched.
+    .allowEager('[tags, paragraphs]')
+    .eager('[tags, paragraphs]')
+    .then(function(post){
+
+        if (!post) {
+            throw createStatusCodeError(404);
+        }
+
+        res.send(post);
+    });
+
+});
 
 module.exports = router;
