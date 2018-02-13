@@ -38,4 +38,14 @@ router.get('/:id', function(req, res, next) {
 
 });
 
+/* DELETE post by id. */
+router.delete('/:id', function(req, res, next) {
+
+    const post = Post.query().deleteById(req.params.id)
+    .then(function(post){
+        res.send({});
+    });
+
+});
+
 module.exports = router;
