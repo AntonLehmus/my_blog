@@ -5,8 +5,8 @@ const Model = require('objection').Model;
 //const Post   = require('./Post');
 
 class Tag extends Model {
-    // Table name is the only required property.
-    static get tableName() {
+
+   static get tableName() {
       return 'Tag';
   }
 

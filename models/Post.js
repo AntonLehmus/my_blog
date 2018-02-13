@@ -6,12 +6,11 @@ const Tag   = require('./Tag');
 const Paragraph = require('./Paragraph');
 
 class Post extends Model {
-    // Table name is the only required property.
-    static get tableName() {
+
+  static get tableName() {
       return 'Post';
   }
 
-  // This object defines the relations to other models.
   static relationMappings() {
     return {
       paragraphs: {
