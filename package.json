@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "seed": "knex seed:run",
-    "migrate":"knex migrate:latest",
-    "migrate-rollback":"knex migrate:rollback",
+    "migrate": "knex migrate:latest",
+    "migrate-rollback": "knex migrate:rollback",
     "prod": "npm run migrate && node ./bin/www",
     "dev": "npm run migrate-rollback && npm run migrate && npm run seed && nodemon ./bin/www"
   },
@@ -19,11 +19,12 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "compression": "^1.7.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^5.0.0",
-    "express": "^4.15.5",
-    "jade": "~1.11.0",
+    "express": "^4.16.2",
+    "helmet": "^3.11.0",
     "knex": "^0.14.2",
     "morgan": "~1.9.0",
     "objection": "^0.9.4",

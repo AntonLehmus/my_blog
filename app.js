@@ -8,34 +8,33 @@ const bodyParser = require('body-parser');
 const knexConfig = require('./knexfile');
 const Knex = require('knex');
 const { Model } = require('objection');
+const helmet = require('helmet');
+const compression = require('compression');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
 const posts = require('./routes/posts');
 
 
 const app = express();
 
 // Initialize knex.
-const knex = Knex(knexConfig.development);
+const knex = Knex(knexConfig[process.env.NODE_ENV]);
 
 // Bind all Models to a knex instance. If you only have one database in
 Model.knex(knex);
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(helmet());
+app.use(compression());
+app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Route registration
 app.use('/', index);
-app.use('/users', users);
 app.use('/posts', posts);
 
 // catch 404 and forward to error handler

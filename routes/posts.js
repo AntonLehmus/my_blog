@@ -29,9 +29,8 @@ router.get('/:id', function(req, res, next) {
     .allowEager('[tags, paragraphs]')
     .eager('[tags, paragraphs]')
     .then(function(post){
-
         if (!post) {
-            throw createStatusCodeError(404);
+            res.status(404).send('{}');
         }
 
         res.send(post);
