@@ -1,0 +1,4 @@
+.git
+*.md
+!README.*.md
+.env
