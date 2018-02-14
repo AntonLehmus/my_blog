@@ -6,7 +6,7 @@ const Post = require('../models/Post');
 //const Paragraph = require('../models/Paragraph');
 
 
-/* GET posts listing. */
+/* GET all posts. */
 router.get('/', function(req, res, next) {
 
     const posts = Post.query()
@@ -46,6 +46,26 @@ router.delete('/:id', function(req, res, next) {
         res.send({});
     });
 
+});
+
+/* CREATE new post */
+router.post('/', async (req, res) => {
+    const graph = req.body;
+
+    console.log(graph);
+
+    // It's a good idea to wrap `insertGraph` call in a transaction since it
+    // may create multiple queries.
+    const insertedGraph = await transaction(Post.knex(), trx => {
+      return (
+        Post.query(trx)
+          // For security reasons, limit the relations that can be inserted.
+          .allowInsert('[paragraphs.[header,content],tags.[name]]')
+          .insertGraph(graph)
+      );
+    });
+
+    res.send(insertedGraph);
 });
 
 module.exports = router;
