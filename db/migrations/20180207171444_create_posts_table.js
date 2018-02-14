@@ -4,7 +4,8 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('Post', function (table) {
             table.increments().primary();
             table.string('title').notNullable();
-            table.timestamps(false, true);  //use dateTime as type instead of timestamp and default values to current timestamp
+            table.timestamps(false, true);
+            table.index('title');  //use dateTime as type instead of timestamp and default values to current timestamp
         })
     ])
 };
