@@ -80,7 +80,7 @@ exports.add_tags = async (req, res, next) => {
         res.status(404).json({message:'post not found'});
     }
 
-    await post.$relatedQuery('tags').relate(req.body.tag_ids)
+    await post.$relatedQuery('tags').relate(req.body.tag_ids);
 
     res.send(post);
 };
