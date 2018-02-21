@@ -1,71 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const { transaction } = require('objection');
-const Post = require('../models/Post');
-//const Tag = require('../models/Tag');
-//const Paragraph = require('../models/Paragraph');
+
+const postController = require('../controllers/postController');
 
 
 /* GET all posts. */
-router.get('/', function(req, res, next) {
+router.get('/', postController.post_get_all);
 
-    const posts = Post.query()
-    .skipUndefined()
-    // For security reasons, limit the relations that can be fetched.
-    .allowEager('[tags, paragraphs]')
-    .eager('[tags, paragraphs]')
-    .then(function(posts){
-        res.send(posts);
-    });
-
-});
+/* GET all posts with eager loaded data. */
+router.get('/eager', postController.post_get_all_eager);
 
 /* GET post by id. */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', postController.find_by_id);
 
-    const post = Post.query().findById(req.params.id)
-    .skipUndefined()
-    // For security reasons, limit the relations that can be fetched.
-    .allowEager('[tags, paragraphs]')
-    .eager('[tags, paragraphs]')
-    .then(function(post){
-        if (!post) {
-            res.status(404).send('{}');
-        }
-
-        res.send(post);
-    });
-
-});
+/* GET post by id. */
+router.get('/:id/eager', postController.find_by_id_eager);
 
 /* DELETE post by id. */
-router.delete('/:id', function(req, res, next) {
-
-    const post = Post.query().deleteById(req.params.id)
-    .then(function(post){
-        res.send({});
-    });
-
-});
+router.delete('/:id', postController.delete_by_id);
 
 /* CREATE new post */
-router.post('/', async (req, res) => {
-    const graph = req.body;
+router.post('/', postController.create);
 
-    console.log(graph);
+/* UPDATE post by id */
+router.patch('/:id', postController.patch);
 
-    // It's a good idea to wrap `insertGraph` call in a transaction since it
-    // may create multiple queries.
-    const insertedGraph = await transaction(Post.knex(), trx => {
-      return (
-        Post.query(trx)
-          // For security reasons, limit the relations that can be inserted.
-          .allowInsert('[paragraphs.[header,content],tags.[name]]')
-          .insertGraph(graph)
-      );
-    });
+/* ADD tags for post */
+router.post('/:id/tags', postController.add_tags);
 
-    res.send(insertedGraph);
-});
+/* REMOVE tags for post */
+router.delete('/:id/tags', postController.remove_tags);
 
 module.exports = router;
