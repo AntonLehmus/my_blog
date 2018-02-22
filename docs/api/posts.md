@@ -225,7 +225,7 @@ If you add paragraphs or tags those are added as well.
 
 #### sample request body
 ```
-{"tag_ids":["3","5","1"]}
+{"tag_ids":[3,5,1]}
 ```
 
 #### sample response
@@ -248,7 +248,7 @@ If you add paragraphs or tags those are added as well.
 
 #### sample request body
 ```
-{"tag_ids":["3","5","1"]}
+{"tag_ids":[3,5,1]}
 ```
 
 #### sample response

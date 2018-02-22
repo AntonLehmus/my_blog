@@ -12,7 +12,7 @@
 ```
 {"header":"",
 "content":"",
-"post_id":""}
+"post_id":}
 ```
 
 
@@ -21,7 +21,7 @@
 {
     "header": "My header here",
     "content": "The paragraph body goes here",
-    "post_id": "1",
+    "post_id": 1,
     "id": 21
 }
 ```

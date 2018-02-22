@@ -39,6 +39,8 @@ exports.delete_by_id = async (req, res, next) => {
 exports.create = async (req, res, next) => {
     const graph = req.body;
 
+    console.log(graph);
+
     // It's a good idea to wrap `insertGraph` call in a transaction since it
     // may create multiple queries.
     const insertedGraph = await transaction(Paragraph.knex(), trx => {

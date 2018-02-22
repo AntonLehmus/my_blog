@@ -10,6 +10,20 @@ class Paragraph extends Model {
       return 'Paragraph';
   }
 
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['header','content','post_id'],
+
+      properties: {
+        id: { type: 'integer' },
+        post_id: { type: ['integer'] },
+        header: { type: 'string', minLength: 1, maxLength: 255 },
+        content: { type: 'string', minLength: 1},
+      }
+    };
+  }
+
   static relationMappings() {
     return{
       post: {

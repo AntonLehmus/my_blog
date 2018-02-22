@@ -11,6 +11,18 @@ class Post extends Model {
       return 'Post';
   }
 
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['title'],
+
+      properties: {
+        id: { type: 'integer' },
+        title: { type: 'string', minLength: 1, maxLength: 255 }
+      }
+    };
+  }
+
   static relationMappings() {
     return {
       paragraphs: {
