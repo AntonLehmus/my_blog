@@ -2,7 +2,7 @@ const { transaction } = require('objection');
 const Post = require('../models/Post');
 
 //load all posts
-exports.post_get_all = async (req, res, next) => {
+exports.get_all = async (req, res, next) => {
 
     const posts = await Post.query()
     .skipUndefined();

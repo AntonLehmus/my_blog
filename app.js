@@ -12,7 +12,10 @@ const helmet = require('helmet');
 const compression = require('compression');
 
 const index = require('./routes/index');
-const posts = require('./routes/posts');
+const postRoutes = require('./routes/posts');
+const paragraphRoutes = require('./routes/paragraphs');
+//const tagRoutes = require('./routes/tags');
+
 
 
 const app = express();
@@ -49,7 +52,9 @@ app.use((req, res, next) => {
 
 // Route registration
 app.use('/', index);
-app.use('/posts', posts);
+app.use('/posts', postRoutes);
+app.use('/paragraphs', paragraphRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

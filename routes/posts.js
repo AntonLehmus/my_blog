@@ -5,7 +5,7 @@ const postController = require('../controllers/postController');
 
 
 /* GET all posts. */
-router.get('/', postController.post_get_all);
+router.get('/', postController.get_all);
 
 /* GET all posts with eager loaded data. */
 router.get('/eager', postController.post_get_all_eager);
