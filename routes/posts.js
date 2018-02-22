@@ -1,8 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator/check');
+const { matchedData, sanitize } = require('express-validator/filter');
+const { buildSanitizeFunction } = require('express-validator/filter');
+const sanitizeBodyAndQuery = buildSanitizeFunction(['body', 'query']);
 
 const postController = require('../controllers/postController');
 
+const checkValidationResult = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.mapped() });
+    }
+};
 
 /* GET all posts. */
 router.get('/', postController.get_all);
@@ -11,10 +21,14 @@ router.get('/', postController.get_all);
 router.get('/eager', postController.post_get_all_eager);
 
 /* GET post by id. */
-router.get('/:id', postController.find_by_id);
+router.get('/:id',
+    [ check('id').trim().isInt({min:1}),
+    sanitize('id').toInt() ],
+    checkValidationResult,
+    postController.find_by_id);
 
 /* GET post by id. */
-router.get('/:id/eager', postController.find_by_id_eager);
+router.get('/:id/eager', [ sanitizeBodyAndQuery('id').toInt() ], postController.find_by_id_eager);
 
 /* DELETE post by id. */
 router.delete('/:id', postController.delete_by_id);

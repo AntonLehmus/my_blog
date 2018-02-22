@@ -7,8 +7,8 @@ services:
           workdir: ${WORKDIR}
     command: npm run ${RUN_COMMAND}
     volumes:
-      - .:${WORKDIR}
-      - ${WORKDIR}/node_modules
+      - ".:${WORKDIR}"
+      - "./node_modules:${WORKDIR}/node_modules"
     ports:
       - "8080:80"
       - "8181:433"
@@ -23,7 +23,7 @@ services:
     image: postgres:10-alpine
     restart: always
     volumes:
-      - ./postgres/data:/var/lib/postgres/
+      - "./postgres/data:/var/lib/postgres/"
     expose:
       - "5432"
     networks:
