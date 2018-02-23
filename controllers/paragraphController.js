@@ -5,59 +5,75 @@ const Post = require('../models/Post');
 
 //load all paragraphs
 exports.get_all = async (req, res, next) => {
+    try{
+        const paragraphs = await Paragraph.query()
+        .skipUndefined();
 
-    const paragraphs = await Paragraph.query()
-    .skipUndefined();
-
-    res.send(paragraphs);
+        res.send(paragraphs);
+    }catch(err){
+        return res.status(500).send();
+    }
 };
 
 //find paragraph by id
 exports.find_by_id = async (req, res, next) => {
+    try{
+        const paragraph = await Paragraph.query().findById(req.params.id);
 
-    const paragraph = await Paragraph.query().findById(req.params.id);
-
-    paragraph ? res.send(paragraph) : res.status(404).json({message:'paragraph not found'});
+        paragraph ? res.send(paragraph) : res.status(404).json({message:'paragraph not found'});
+    }catch(err){
+        return res.status(500).send();
+    }
 }
 
 //find paragraph by post id
 exports.find_by_post_id = async (req, res, next) => {
+    try{
+        const post = await Post.query().findById(req.params.id).eager('[paragraphs]');
 
-    const post = await Post.query().findById(req.params.id).eager('[paragraphs]');
-
-    post ? res.send(post.paragraphs) : res.status(404).json({message:'post not found'});
+        post ? res.send(post.paragraphs) : res.status(404).json({message:'post not found'});
+    }catch(err){
+        return res.status(500).send();
+    }
 }
 
 //delete paragraph by id
 exports.delete_by_id = async (req, res, next) => {
-
-    const paragraph = await Paragraph.query().deleteById(req.params.id);
-    res.send({});
+    try{
+        const paragraph = await Paragraph.query().deleteById(req.params.id);
+        res.send({});
+    }catch(err){
+        return res.status(500).send();
+    }
 }
 
 //create paragraph
 exports.create = async (req, res, next) => {
     const graph = req.body;
 
-    console.log(graph);
+    try{
+        const insertedGraph = await transaction(Paragraph.knex(), trx => {
+          return (
+            Paragraph.query(trx)
+              .allowInsert('[paragraphs.[header,content]]')
+              .insertGraph(graph)
+          );
+        });
 
-    // It's a good idea to wrap `insertGraph` call in a transaction since it
-    // may create multiple queries.
-    const insertedGraph = await transaction(Paragraph.knex(), trx => {
-      return (
-        Paragraph.query(trx)
-          // For security reasons, limit the relations that can be inserted.
-          .allowInsert('[paragraphs.[header,content]]')
-          .insertGraph(graph)
-      );
-    });
+        res.send(insertedGraph);
+    }catch(err){
+        return res.status(500).send();
+    }
 
-    res.send(insertedGraph);
 };
 
 //update paragraph
 exports.patch = async (req, res, next) => {
-    const paragraph = await Paragraph.query().patchAndFetchById(req.params.id, req.body);
+    try{
+        const paragraph = await Paragraph.query().patchAndFetchById(req.params.id, req.body);
 
-    res.send(paragraph);
+        res.send(paragraph);
+    }catch(err){
+        return res.status(500).send();
+    }
 };

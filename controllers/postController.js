@@ -98,7 +98,6 @@ exports.patch = async (req, res, next) => {
 
 //add new tags for post
 exports.add_tags = async (req, res, next) => {
-
     const post = await Post.query().findById(req.params.id).eager('[tags]');
 
     if(!post){
