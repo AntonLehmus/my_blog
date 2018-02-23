@@ -228,16 +228,6 @@ If you add paragraphs or tags those are added as well.
 {"tag_ids":[3,5,1]}
 ```
 
-#### sample response
-```
-{
-    "id": 3,
-    "title": "good news everyone",
-    "created_at": "2018-02-21T11:53:35.096Z",
-    "updated_at": "2018-02-21T11:53:35.096Z"
-}
-```
-
 ## Remove tags from post
 
 ### Request
