@@ -14,7 +14,7 @@ const compression = require('compression');
 const index = require('./routes/index');
 const postRoutes = require('./routes/posts');
 const paragraphRoutes = require('./routes/paragraphs');
-//const tagRoutes = require('./routes/tags');
+const tagRoutes = require('./routes/tags');
 
 
 
@@ -54,6 +54,8 @@ app.use((req, res, next) => {
 app.use('/', index);
 app.use('/posts', postRoutes);
 app.use('/paragraphs', paragraphRoutes);
+app.use('/tags',tagRoutes);
+
 
 
 // catch 404 and forward to error handler
