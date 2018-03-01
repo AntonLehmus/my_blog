@@ -2,7 +2,6 @@
 'use strict';
 
 const Model = require('objection').Model;
-//const Post   = require('./Post');
 
 class Tag extends Model {
 
