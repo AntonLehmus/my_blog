@@ -15,6 +15,8 @@ const index = require('./routes/index');
 const postRoutes = require('./routes/posts');
 const paragraphRoutes = require('./routes/paragraphs');
 const tagRoutes = require('./routes/tags');
+const userRoutes = require('./routes/user');
+
 
 
 
@@ -55,6 +57,7 @@ app.use('/', index);
 app.use('/posts', postRoutes);
 app.use('/paragraphs', paragraphRoutes);
 app.use('/tags',tagRoutes);
+app.use('/user',userRoutes);
 
 
 

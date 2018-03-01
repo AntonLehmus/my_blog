@@ -18,6 +18,7 @@
     "delay": "2500"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "~1.18.2",
     "compression": "^1.7.1",
     "cookie-parser": "~1.4.3",
