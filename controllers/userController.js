@@ -76,20 +76,31 @@ exports.login = async (req, res, next) => {
             }
 
             if (result) {
-                const token = jwt.sign(
+                jwt.sign(
                 {
                     email: user.email,
                     userId: user.id
-                },process.env.JWT_KEY,{ expiresIn: '1h' });
+                },
+                process.env.JWT_KEY,
+                { expiresIn: '1h' },
+                (err, token) => {
+                    if(err){
+                        res.status(401).json({
+                            message: "Auth failed"
+                        });
+                    }
+                    return res.status(200).json({
+                        message: "Auth successful",
+                        token: token
+                    });
+                });
 
-                return res.status(200).json({
-                    message: "Auth successful",
-                    token: token
+            }
+            else{
+                res.status(401).json({
+                    message: "Auth failed"
                 });
             }
-            res.status(401).json({
-                message: "Auth failed"
-            });
         });
     }catch(err){
         return res.status(500).send(err);
@@ -113,11 +124,9 @@ exports.patch = async (req, res, next) => {
             }
             return res.status(404).send();
         }catch(err){
-            console.log(err);
             return res.status(500).send();
         }
     }catch(err){
-        console.log(err);
         return res.status(500).send();
     };
 };
