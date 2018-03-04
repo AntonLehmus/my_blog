@@ -48,9 +48,9 @@ exports.create = async (req, res, next) => {
 };
 
 //delete user by id
-exports.delete_by_id = async (req, res, next) => {
+exports.delete_by_email = async (req, res, next) => {
     try{
-        const user = await User.query().deleteById(req.params.id);
+        await User.query().delete().where('email', req.body.email).first();
         res.send({});
     }catch(err){
         return res.status(500).send(err);
@@ -94,4 +94,30 @@ exports.login = async (req, res, next) => {
     }catch(err){
         return res.status(500).send(err);
     }
+};
+
+//update user
+exports.patch = async (req, res, next) => {
+    try{
+        const pw =  req.body.newPassword ? req.body.newPassword : req.body.password;
+
+        const password = await bcrypt.hash(pw, saltRounds);
+
+        try{
+            email = req.body.newEmail ? req.body.newEmail : req.body.email;
+
+            const updated = await User.query().where('email', req.body.email).first().patch({email: email, password: password });
+
+            if(updated){
+                return res.status(200).send();
+            }
+            return res.status(404).send();
+        }catch(err){
+            console.log(err);
+            return res.status(500).send();
+        }
+    }catch(err){
+        console.log(err);
+        return res.status(500).send();
+    };
 };

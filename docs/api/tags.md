@@ -8,7 +8,7 @@
 | ------------- |:-------------:|
 | POST      | /tags/ |
 
-#### sample request body with optional new tags and tags
+#### sample request body
 ```
 {"name":"My tag"}
 ```

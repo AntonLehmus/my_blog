@@ -17,11 +17,11 @@ router.post('/create',
     userController.create);
 
 /* DELETE user by id. */
-router.delete('/:id',
-    [ check('id').trim().isInt({min:1}),
-    sanitize('id').toInt() ],
+router.delete('/',
+    [ check('email'),
+    sanitize('email') ],
     checkValidationResult,
-    userController.delete_by_id);
+    userController.delete_by_email);
 
 
 /* login */
@@ -31,5 +31,13 @@ router.post('/login',
     sanitize(['email','password'])],
     checkValidationResult,
     userController.login);
+
+/* UPDATE user by id */
+router.patch('/',
+    [check('email').exists(),
+    check('password').exists(),
+    sanitize(['email','password'])],
+    checkValidationResult,
+    userController.patch);
 
 module.exports = router;
