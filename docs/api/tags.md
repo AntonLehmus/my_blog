@@ -4,9 +4,9 @@
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| POST      | /tags/ |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| POST      | /tags/ | Yes |
 
 #### sample request body
 ```
@@ -26,9 +26,9 @@
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| PATCH     | /tags/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| PATCH     | /tags/id | Yes |
 
 #### sample request body
 ```
@@ -45,9 +45,9 @@
 
 ## Delete tag
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| DELETE     | /tags/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| DELETE     | /tags/id | Yes |
 
 #### sample response
 ```
@@ -56,9 +56,9 @@
 
 ## Read tag
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| GET     | /tags |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| GET     | /tags | No |
 
 #### sample response
 ```
@@ -82,11 +82,11 @@
 ]
 ```
 
-## Get tags for post
+## Get posts for tag
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| GET     | /tags/id/posts |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| GET     | /tags/id/posts | No |
 
 
 #### sample response

@@ -6,6 +6,8 @@ const { buildSanitizeFunction } = require('express-validator/filter');
 
 const postController = require('../controllers/postController');
 const checkValidationResult = require('../middleware/checkValidationResult');
+const checkAuth = require('../middleware/checkAuth');
+
 
 
 /* GET all posts. */
@@ -21,7 +23,7 @@ router.get('/:id',
     checkValidationResult,
     postController.find_by_id);
 
-/* GET post by id. */
+/* GET post by id and eager load data. */
 router.get('/:id/eager', [
     check('id').trim().isInt({min:1}),
     sanitize('id').toInt() ],
@@ -33,13 +35,14 @@ router.delete('/:id', [
     check('id').trim().isInt({min:1}),
     sanitize('id').toInt() ],
     checkValidationResult,
+    checkAuth,
     postController.delete_by_id);
 
 /* CREATE new post */
 router.post('/', [
     check('title').exists(),
-    sanitize(['title','header','content','name']),
-    ],
+    sanitize(['title','header','content','name']),],
+    checkAuth,
     checkValidationResult,
     postController.create);
 
@@ -49,6 +52,7 @@ router.patch('/:id', [
     check('title').exists(),
     sanitize(['title','header','content','name']),
     sanitize('id').toInt() ],
+    checkAuth,
     checkValidationResult,
     postController.patch);
 
@@ -58,6 +62,7 @@ router.post('/:id/tags', [
     sanitize('id').toInt(),
     check('tag_ids').exists().isNumeric()],
     checkValidationResult,
+    checkAuth,
     postController.add_tags);
 
 /* REMOVE tags for post */
@@ -66,6 +71,7 @@ router.delete('/:id/tags', [
     sanitize('id').toInt(),
     check('tag_ids').exists().isNumeric()],
     checkValidationResult,
+    checkAuth,
     postController.remove_tags);
 
 module.exports = router;

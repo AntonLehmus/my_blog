@@ -6,6 +6,8 @@ const { buildSanitizeFunction } = require('express-validator/filter');
 
 const tagController = require('../controllers/tagController');
 const checkValidationResult = require('../middleware/checkValidationResult');
+const checkAuth = require('../middleware/checkAuth');
+
 
 
 
@@ -31,6 +33,7 @@ router.delete('/:id',
     [ check('id').trim().isInt({min:1}),
     sanitize('id').toInt() ],
     checkValidationResult,
+    checkAuth,
     tagController.delete_by_id);
 
 /* CREATE new tag */
@@ -38,6 +41,7 @@ router.post('/',
     [check('name').exists(),
     sanitize(['name'])],
     checkValidationResult,
+    checkAuth,
     tagController.create);
 
 /* UPDATE tag by id */
@@ -47,6 +51,7 @@ router.patch('/:id',
     check('name').exists(),
     sanitize(['name'])],
     checkValidationResult,
+    checkAuth,
     tagController.patch);
 
 

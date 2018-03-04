@@ -6,6 +6,7 @@ const { buildSanitizeFunction } = require('express-validator/filter');
 
 const userController = require('../controllers/userController');
 const checkValidationResult = require('../middleware/checkValidationResult');
+const checkAuth = require('../middleware/checkAuth');
 
 
 /* CREATE new user */
@@ -16,11 +17,12 @@ router.post('/create',
     checkValidationResult,
     userController.create);
 
-/* DELETE user by id. */
+/* DELETE user by email. */
 router.delete('/',
     [ check('email'),
     sanitize('email') ],
     checkValidationResult,
+    checkAuth,
     userController.delete_by_email);
 
 
@@ -32,12 +34,13 @@ router.post('/login',
     checkValidationResult,
     userController.login);
 
-/* UPDATE user by id */
+/* UPDATE user by email */
 router.patch('/',
     [check('email').exists(),
     check('password').exists(),
     sanitize(['email','password'])],
     checkValidationResult,
+    checkAuth,
     userController.patch);
 
 module.exports = router;

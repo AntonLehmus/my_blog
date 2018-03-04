@@ -4,9 +4,9 @@
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| POST      | /posts/ |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| POST      | /posts/ | Yes |
 
 #### sample request body with optional new paragraphs and tags
 ```
@@ -48,9 +48,9 @@ If you add paragraphs or tags those are added as well.
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| PATCH     | /posts/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| PATCH     | /posts/id | Yes |
 
 #### sample request body
 ```
@@ -67,9 +67,9 @@ If you add paragraphs or tags those are added as well.
 
 ## Delete post
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| DELETE     | /posts/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| DELETE     | /posts/id | Yes |
 
 #### sample response
 ```
@@ -78,10 +78,10 @@ If you add paragraphs or tags those are added as well.
 
 ## Read post
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| GET     | /posts |
-| GET     | /posts/eager |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| GET     | /posts | No |
+| GET     | /posts/eager | No |
 
 /eager eager loads paragraphs and tags
 #### sample response
@@ -219,9 +219,9 @@ If you add paragraphs or tags those are added as well.
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| POST     | /posts/id/tags |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| POST     | /posts/id/tags |  Yes |
 
 #### sample request body
 ```
@@ -232,9 +232,9 @@ If you add paragraphs or tags those are added as well.
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| DELETE     | /posts/id/tags  |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| DELETE     | /posts/id/tags  | Yes |
 
 #### sample request body
 ```

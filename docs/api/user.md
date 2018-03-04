@@ -4,9 +4,9 @@
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| POST      | /user/create |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| POST      | /user/create | No |
 
 
 ```
@@ -24,9 +24,9 @@ empty body with status code 201. Note that for the time being this supports only
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| PATCH     | /users |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| PATCH     | /users | Yes |
 
 #### sample request body
 You can send either newPassword or newEmail or both.
@@ -44,9 +44,9 @@ Status code 200 or 404
 
 ## Delete user
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| DELETE     | /user|
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| DELETE     | /user| Yes |
 
 #### sample request body
 ```
@@ -66,9 +66,9 @@ The JWT token is valid for one hour.
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| PATCH     | /user/login |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| PATCH     | /user/login | No |
 
 #### sample request body
 ```

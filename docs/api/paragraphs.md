@@ -4,9 +4,9 @@
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| POST      | /paragraphs/ |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| POST      | /paragraphs/ | Yes |
 
 #### sample request body with optional new paragraphs and tags
 ```
@@ -30,9 +30,9 @@
 
 ### Request
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| PATCH     | /paragraphs/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| PATCH     | /paragraphs/id | Yes |
 
 #### sample request body
 Note that you can also send only header or conent if you do not wish to update the other.
@@ -55,9 +55,9 @@ Note that you can also send only header or conent if you do not wish to update t
 
 ## Delete paragraph
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| DELETE     | /paragraphs/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| DELETE     | /paragraphs/id | Yes |
 
 #### sample response
 ```
@@ -66,9 +66,9 @@ Note that you can also send only header or conent if you do not wish to update t
 
 ## Read paragraph
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| GET     | /paragraphs |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| GET     | /paragraphs | No |
 
 #### sample response
 ```
@@ -94,9 +94,9 @@ Note that you can also send only header or conent if you do not wish to update t
 
 ## Get paragraphs for post
 
-| Method        | ULR          |
-| ------------- |:-------------:|
-| GET     | /paragraphs/post/id |
+| Method        | ULR          | Protected          |
+| ------------- |:-------------:|:-------------:|
+| GET     | /paragraphs/post/id |  No |
 
 
 #### sample response

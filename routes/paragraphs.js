@@ -6,6 +6,8 @@ const { buildSanitizeFunction } = require('express-validator/filter');
 
 const paragraphController = require('../controllers/paragraphController');
 const checkValidationResult = require('../middleware/checkValidationResult');
+const checkAuth = require('../middleware/checkAuth');
+
 
 
 
@@ -31,6 +33,7 @@ router.delete('/:id',
     [ check('id').trim().isInt({min:1}),
     sanitize('id').toInt() ],
     checkValidationResult,
+    checkAuth,
     paragraphController.delete_by_id);
 
 /* CREATE new paragraph */
@@ -40,6 +43,7 @@ router.post('/',
     check('post_id').exists().isInt({min:1}),
     sanitize(['header','content'])],
     checkValidationResult,
+    checkAuth,
     paragraphController.create);
 
 /* UPDATE paragraph by id */
@@ -51,6 +55,7 @@ router.patch('/:id',
     check('post_id').exists().isInt({min:1}),
     sanitize(['header','content'])],
     checkValidationResult,
+    checkAuth,
     paragraphController.patch);
 
 
