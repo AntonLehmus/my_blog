@@ -16,4 +16,20 @@ router.post('/create',
     checkValidationResult,
     userController.create);
 
+/* DELETE user by id. */
+router.delete('/:id',
+    [ check('id').trim().isInt({min:1}),
+    sanitize('id').toInt() ],
+    checkValidationResult,
+    userController.delete_by_id);
+
+
+/* login */
+router.post('/login',
+    [check('email').exists(),
+    check('password').exists(),
+    sanitize(['email','password'])],
+    checkValidationResult,
+    userController.login);
+
 module.exports = router;
