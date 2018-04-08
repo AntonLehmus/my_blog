@@ -10,9 +10,7 @@ services:
       - ".:${WORKDIR}"
       - "${WORKDIR}/node_modules"
     ports:
-      - "8080:80"
-      - "8181:433"
-      - "3000:3000"
+      - "${PORT}:${PORT}"
     networks:
       - backend
     depends_on:
